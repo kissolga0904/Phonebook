@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PersonController::class, 'index']);
+Route::get('/create', [PersonController::class, 'create']);
+Route::post('/create', [PersonController::class, 'store'])->name('people.store');
+
+Route::get('/edit/{person}',[PersonController::class, 'edit']);
+Route::put('/edit/{person}',[PersonController::class, 'update']);
+
+Route::delete('/delete/{person}', [PersonController::class, 'destroy'])->name('people.delete');
